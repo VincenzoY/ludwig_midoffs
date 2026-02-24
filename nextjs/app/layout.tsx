@@ -3,6 +3,7 @@ import { Rubik } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import InfoButton from "@/components/InfoButton/InfoButton";
+import Script from "next/script";
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -11,7 +12,6 @@ const rubik = Rubik({
 
 export const metadata: Metadata = {
   title: "Jerkoffs 2026",
-  description: "Your description here",
   icons: {
     icon: "/gold_ingot.ico",
   },
@@ -24,8 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script defer src="https://umami.vyee.ca/script.js" data-website-id="cfcf5715-fecf-455b-a817-95e6d2b39efc" />
+      </head>
       <body className={`${rubik.variable} antialiased`}>
-        <div className="bg-zinc-50 dark:bg-zinc-900 min-h-screen h-full">
+        <div className="bg-zinc-200 dark:bg-zinc-900 min-h-screen h-full">
           <Providers>
             <InfoButton />
             {children}

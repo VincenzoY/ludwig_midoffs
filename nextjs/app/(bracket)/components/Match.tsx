@@ -32,7 +32,7 @@ function PlayerRow({ player, wins, is_winner, is_bye }: PlayerRowProps) {
       className={`flex items-center justify-between px-3 py-2 ${
         is_winner
           ? "bg-offbrand/20 font-semibold"
-          : "bg-white dark:bg-zinc-800"
+          : "bg-zinc-300 dark:bg-zinc-800"
       }`}
     >
       <span className="flex gap-2 flex-row items-center">

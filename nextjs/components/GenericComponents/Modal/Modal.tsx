@@ -36,7 +36,7 @@ const Modal: React.FC<ModalProps> = ({
                 >
                     <div 
                         className={`
-                            bg-white dark:bg-zinc-800 
+                            bg-zinc-100 dark:bg-zinc-800 
                             border border-zinc-200 dark:border-zinc-700 rounded-lg
                             shadow-lg mx-4
                             transition-all duration-200 ease-in-out

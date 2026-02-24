@@ -40,20 +40,20 @@ function PlayerCard({ player_id, wins, is_winner }: PlayerCardProps) {
 
   if (!player_id) {
     return (
-      <div className="h-10 p-2 bg-zinc-100 dark:bg-zinc-700 rounded flex items-center" />
+      <div className="h-10 p-2 bg-zinc-300 dark:bg-zinc-700 rounded flex items-center" />
     );
   }
 
   if (isLoading) {
     return (
-      <div className="h-10 p-2 bg-zinc-100 dark:bg-zinc-700 rounded animate-pulse flex items-center">
+      <div className="h-10 p-2 bg-zinc-300 dark:bg-zinc-700 rounded animate-pulse flex items-center">
         <div className="h-5 bg-zinc-200 dark:bg-zinc-600 rounded w-24" />
       </div>
     );
   }
 
   return (
-    <div className={`p-3 rounded flex flex-row justify-between ${is_winner ? "bg-offbrand/20" : "bg-zinc-100 dark:bg-zinc-700"}`}>
+    <div className={`p-3 rounded flex flex-row justify-between ${is_winner ? "bg-offbrand/20" : "bg-zinc-300 dark:bg-zinc-700"}`}>
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
           {player && (
