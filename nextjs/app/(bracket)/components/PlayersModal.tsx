@@ -23,12 +23,8 @@ function PlayerCard({ player_id }: { player_id: PlayerId }) {
     queryFn: () => fetch_player(player_id),
   });
 
-  if (isLoading) {
-    return (
-      <div className="p-3 bg-zinc-100 dark:bg-zinc-700 rounded animate-pulse">
-        <div className="h-5 bg-zinc-200 dark:bg-zinc-600 rounded w-24" />
-      </div>
-    );
+  if (isLoading || !player) {
+    return null;
   }
 
   return (
@@ -121,7 +117,7 @@ export function PlayersButton({ player_ids }: PlayersButtonProps) {
 
 export function PlayersSidebar({ player_ids }: PlayersButtonProps) {
   return (
-    <div className="hidden lg:flex lg:flex-col p-4 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden">
+    <div className="hidden lg:flex lg:flex-col p-4 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden min-w-[300px]">
       <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-4 shrink-0">
         Players
       </h2>
