@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <Script defer src="https://umami.vyee.ca/script.js" data-website-id="cfcf5715-fecf-455b-a817-95e6d2b39efc" />
       </head>
