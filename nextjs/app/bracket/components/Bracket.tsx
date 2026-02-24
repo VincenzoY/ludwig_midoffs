@@ -1,4 +1,4 @@
-import { Bracket as BracketType } from "@/bracket/types";
+import { Bracket as BracketType } from "@/lib/bracket/types";
 import { get_matches_by_round } from "../utils";
 import { Round } from "./Round";
 import { RoundConnector } from "./RoundConnector";
@@ -8,8 +8,6 @@ interface BracketProps {
 }
 
 export function Bracket({ bracket }: BracketProps) {
-  const rounds = [1, 2, 3, 4];
-
   // Fixed total height for the bracket
   const total_height = 800;
 
@@ -20,22 +18,28 @@ export function Bracket({ bracket }: BracketProps) {
           {bracket.name}
         </h1>
         <div className="flex items-start">
-          {rounds.map((round, index) => {
-            const current_matches = get_matches_by_round(bracket.matches, round);
+          {bracket.rounds.map((round_config, index) => {
+            const current_matches = get_matches_by_round(
+              bracket.matches,
+              round_config.round
+            );
             const next_matches =
-              index < rounds.length - 1
-                ? get_matches_by_round(bracket.matches, rounds[index + 1])
+              index < bracket.rounds.length - 1
+                ? get_matches_by_round(
+                    bracket.matches,
+                    bracket.rounds[index + 1].round
+                  )
                 : [];
 
             return (
-              <div key={round} className="flex items-start">
+              <div key={round_config.round} className="flex items-start">
                 <Round
-                  round={round}
+                  round_name={round_config.name}
                   matches={current_matches}
                   players={bracket.players}
                   total_height={total_height}
                 />
-                {index < rounds.length - 1 && (
+                {index < bracket.rounds.length - 1 && (
                   <RoundConnector
                     from_match_count={current_matches.length}
                     to_match_count={next_matches.length}

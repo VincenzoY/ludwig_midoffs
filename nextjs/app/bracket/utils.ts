@@ -1,4 +1,4 @@
-import { Player, PlayerId, Match } from "@/bracket/types";
+import { Player, PlayerId, Match } from "@/lib/bracket/types";
 
 export function get_player_by_id(
   players: Player[],
@@ -18,23 +18,8 @@ export function get_match_winner(match: Match): PlayerId | null {
   return match.result?.winner_id ?? null;
 }
 
-export function get_round_name(round: number): string {
-  switch (round) {
-    case 1:
-      return "Round 1";
-    case 2:
-      return "Quarterfinals";
-    case 3:
-      return "Semifinals";
-    case 4:
-      return "Final";
-    default:
-      return `Round ${round}`;
-  }
-}
-
 export function get_matches_by_round(matches: Match[], round: number): Match[] {
   return matches
-    .filter((match) => match.round === round)
-    .sort((a, b) => a.position - b.position);
+    .filter((match) => match.match_id[0] === round)
+    .sort((a, b) => a.match_id[1] - b.match_id[1]);
 }

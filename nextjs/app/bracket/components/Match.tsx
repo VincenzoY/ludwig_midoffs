@@ -1,4 +1,4 @@
-import { Match as MatchType, Player } from "@/bracket/types";
+import { Match as MatchType, Player } from "@/lib/bracket/types";
 import { get_player_by_id, is_bye_match, get_match_winner } from "../utils";
 
 export const MATCH_HEIGHT = 80;

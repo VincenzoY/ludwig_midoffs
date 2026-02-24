@@ -1,5 +1,5 @@
 import { Bracket } from "./components/Bracket";
-import { placeholder_bracket } from "@/bracket/placeholder";
+import { placeholder_bracket } from "@/lib/bracket/placeholder";
 
 export default function BracketPage() {
   return (
