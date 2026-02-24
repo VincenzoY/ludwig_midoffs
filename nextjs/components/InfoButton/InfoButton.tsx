@@ -23,7 +23,7 @@ const InfoModal = NiceModal.create(() => {
           This site is not affiliated in any way with Ludwig, MCSR, Jerkoffs or any of the streamers involved in the event.
         </p>
         <p>
-          I use Google Analytics to get anonymous web analytics.
+          I use Umami for anonymous web analytics.
         </p>
         <hr className="my-4 border-zinc-200 dark:border-zinc-600" />
         <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2">

@@ -86,7 +86,7 @@ const PlayersListModal = NiceModal.create<PlayersModalProps>(
         onClose={() => modal.hide()}
         onExited={() => modal.remove()}
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-[32rem] overflow-y-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-[32rem] overflow-y-auto hide-scrollbar">
           {player_ids.map((player_id, index) => (
             <PlayerCard key={`${player_id}-${index}`} player_id={player_id} />
           ))}
@@ -121,7 +121,7 @@ export function PlayersSidebar({ player_ids }: PlayersButtonProps) {
       <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-4 shrink-0">
         Players
       </h2>
-      <div className="flex flex-col gap-2 overflow-y-scroll flex-1 min-h-0">
+      <div className="flex flex-col gap-2 overflow-y-scroll flex-1 min-h-0 hide-scrollbar">
         {player_ids.map((player_id, index) => (
           <PlayerCard key={`${player_id}-${index}`} player_id={player_id} />
         ))}

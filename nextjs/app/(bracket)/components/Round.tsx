@@ -1,3 +1,5 @@
+"use client";
+
 import { Match as MatchType } from "@/lib/bracket/types";
 import { Match } from "./Match";
 
@@ -9,7 +11,7 @@ interface RoundProps {
   total_height: number; // Fixed height for all rounds
 }
 
-export async function Round({
+export function Round({
   round_name,
   matches,
   total_height,
