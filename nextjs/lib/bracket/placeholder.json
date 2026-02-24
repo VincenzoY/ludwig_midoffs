@@ -1,0 +1,115 @@
+{
+  "name": "Midoffs 2026",
+  "player_ids": [
+    "e1vmn5z8pxwrub8",
+    "m2z4hgv004typdr",
+    "cc4zhi121xr2fqz",
+    "wu7bk5g3hyde601",
+    "8ij5vhi5723ph9s",
+    "0aooysdlxm6jf5m",
+    "h735ugy7dgcrg69",
+    "ddf8kqno225tv3l",
+    "2k1lctuoc9p30bk",
+    "trq2q9q5h6g4vdf",
+    "2mr5b59i39qtmwb",
+    "cix8qpepyz7zwg8"
+  ],
+  "rounds": [
+    { "round": 1, "name": "Round 1" },
+    { "round": 2, "name": "Quarterfinals" },
+    { "round": 3, "name": "Semifinals" },
+    { "round": 4, "name": "Final" }
+  ],
+  "matches": [
+    {
+      "match_id": [1, 0],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [1, 1],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [1, 2],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [1, 3],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [1, 4],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [1, 5],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [1, 6],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [1, 7],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [2, 0],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [2, 1],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [2, 2],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [2, 3],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [3, 0],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [3, 1],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    },
+    {
+      "match_id": [4, 0],
+      "player_1_id": null,
+      "player_2_id": null,
+      "result": { "status": "WAITING" }
+    }
+  ]
+}

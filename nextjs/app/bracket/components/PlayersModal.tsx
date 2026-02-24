@@ -61,15 +61,17 @@ function PlayerCard({ player_id }: { player_id: PlayerId }) {
                 <span>{player.stream}</span>
               </a>
             )}
-            <a
-              href={`https://mcsrranked.com/stats/${player.mc_username}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
-            >
-              <MCSR width={16} height={16} />
-              <span>mcsrranked.com/stats/{player.mc_username}</span>
-            </a>
+            {player.mc_username && (
+              <a
+                href={`https://mcsrranked.com/stats/${player.mc_username}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+              >
+                <MCSR width={16} height={16} />
+                <span>mcsrranked.com/stats/{player.mc_username}</span>
+              </a>
+            )}
           </div>
         )}
       </div>
