@@ -1,0 +1,9 @@
+services:
+  pocketbase:
+    build:
+      dockerfile: Dockerfile
+    container_name: pocketbase
+    volumes:
+      - pb_data:/pb/pb_data  # Use a different data volume if needed
+    ports:
+      - "8090:8090"  # Expose a different port for testing
