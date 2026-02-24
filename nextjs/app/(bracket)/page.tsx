@@ -27,17 +27,17 @@ export default async function BracketPage() {
 
   if (!bracketEntry) {
     return (
-      <main className="min-h-screen bg-zinc-50 dark:bg-zinc-900 p-8 flex justify-center items-center">
+      <div className="py-16 px-8 flex justify-center">
         <p className="text-zinc-500 dark:text-zinc-400">
           Unable to load bracket. Please try again later.
         </p>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-zinc-50 dark:bg-zinc-900 p-8 flex justify-center">
+    <div className="py-16 px-8 flex justify-center">
       <Bracket bracket={bracketEntry.bracket} />
-    </main>
+    </div>
   );
 }
