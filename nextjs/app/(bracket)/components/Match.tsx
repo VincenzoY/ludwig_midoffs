@@ -1,4 +1,7 @@
-import { Match as MatchType } from "@/lib/bracket/types";
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
+import { Match as MatchType, PlayerId } from "@/lib/bracket/types";
 import { is_bye_match, get_match_winner } from "../utils";
 import pb, { Player as PBPlayer } from "@/lib/pocketbase/pocketbase";
 import Image from "next/image";
@@ -12,13 +15,44 @@ interface MatchProps {
 }
 
 interface PlayerRowProps {
-  player: PBPlayer | null;
+  player_id: PlayerId | null;
   wins: number | null;
   is_winner: boolean;
   is_bye: boolean;
 }
 
-function PlayerRow({ player, wins, is_winner, is_bye }: PlayerRowProps) {
+async function fetch_player(player_id: string | null): Promise<PBPlayer | null> {
+  if (!player_id) return null;
+  try {
+    return await pb.fetchRecordFromCollectionById<PBPlayer>("players", player_id);
+  } catch {
+    return null;
+  }
+}
+
+function PlayerRow({ player_id, wins, is_winner, is_bye }: PlayerRowProps) {
+  const { data: player, isLoading } = useQuery({
+    queryKey: ["player", player_id],
+    queryFn: () => fetch_player(player_id),
+    enabled: !!player_id,
+  });
+
+  if (!player_id) {
+    return (
+      <div className="flex items-center justify-between px-3 py-2 text-zinc-400 dark:text-zinc-600">
+        <span>-</span>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-between px-3 py-2 bg-zinc-300 dark:bg-zinc-800">
+        <div className="h-5 bg-zinc-200 dark:bg-zinc-700 rounded w-20 animate-pulse" />
+      </div>
+    );
+  }
+
   if (!player) {
     return (
       <div className="flex items-center justify-between px-3 py-2 text-zinc-400 dark:text-zinc-600">
@@ -51,21 +85,7 @@ function PlayerRow({ player, wins, is_winner, is_bye }: PlayerRowProps) {
   );
 }
 
-async function fetch_player(player_id: string | null): Promise<PBPlayer | null> {
-  if (!player_id) return null;
-  try {
-    return await pb.fetchRecordFromCollectionById<PBPlayer>("players", player_id);
-  } catch {
-    return null;
-  }
-}
-
-export async function Match({ match }: MatchProps) {
-  const [player_1_data, player_2_data] = await Promise.all([
-    fetch_player(match.player_1_id),
-    fetch_player(match.player_2_id),
-  ]);
-
+export function Match({ match }: MatchProps) {
   const winner_id = get_match_winner(match);
   const is_bye = is_bye_match(match);
   const is_in_progress = match.result.status === "IN_PROGRESS";
@@ -78,14 +98,14 @@ export async function Match({ match }: MatchProps) {
           style={{ height: MATCH_HEIGHT }}
         >
           <PlayerRow
-            player={player_1_data}
+            player_id={match.player_1_id}
             wins={match.result.player_1_wins ?? null}
             is_winner={winner_id === match.player_1_id}
             is_bye={is_bye}
           />
           <div className="border-t border-zinc-300 dark:border-zinc-700" />
           <PlayerRow
-            player={player_2_data}
+            player_id={match.player_2_id}
             wins={match.result.player_2_wins ?? null}
             is_winner={winner_id === match.player_2_id}
             is_bye={false}

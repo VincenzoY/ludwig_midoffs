@@ -1,3 +1,5 @@
+"use client";
+
 import { Bracket as BracketType } from "@/lib/bracket/types";
 import { get_matches_by_round } from "../utils";
 import { Round } from "./Round";
@@ -8,7 +10,7 @@ interface BracketProps {
   bracket: BracketType;
 }
 
-export async function Bracket({ bracket }: BracketProps) {
+export function Bracket({ bracket }: BracketProps) {
   // Fixed total height for the bracket
   const total_height = 800;
 
