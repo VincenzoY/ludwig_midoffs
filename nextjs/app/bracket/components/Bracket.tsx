@@ -2,6 +2,7 @@ import { Bracket as BracketType } from "@/lib/bracket/types";
 import { get_matches_by_round } from "../utils";
 import { Round } from "./Round";
 import { RoundConnector } from "./RoundConnector";
+import { PlayersButton, PlayersSidebar } from "./PlayersModal";
 
 interface BracketProps {
   bracket: BracketType;
@@ -12,12 +13,15 @@ export async function Bracket({ bracket }: BracketProps) {
   const total_height = 800;
 
   return (
-    <div className="max-w-full overflow-x-auto">
-      <div className="inline-flex flex-col gap-6 p-6 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg">
-        <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-          {bracket.name}
-        </h1>
-        <div className="flex items-start">
+    <div className="grid lg:grid-cols-[1fr_auto] gap-6 max-h-[950px]">
+      <div className="flex flex-col gap-6 p-6 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden">
+        <div className="flex items-center justify-between shrink-0">
+          <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+            {bracket.name}
+          </h1>
+          <PlayersButton player_ids={bracket.player_ids} />
+        </div>
+        <div className="flex items-start overflow-x-auto">
           {bracket.rounds.map((round_config, index) => {
             const current_matches = get_matches_by_round(
               bracket.matches,
@@ -50,6 +54,7 @@ export async function Bracket({ bracket }: BracketProps) {
           })}
         </div>
       </div>
+      <PlayersSidebar player_ids={bracket.player_ids} />
     </div>
   );
 }

@@ -2,6 +2,23 @@ import { Bracket } from "./types";
 
 export const placeholder_bracket: Bracket = {
   name: "Midoffs 2026",
+  player_ids: [
+    "e1vmn5z8pxwrub8",
+    "e1vmn5z8pxwrub8",
+    "e1vmn5z8pxwrub8",
+    "e1vmn5z8pxwrub8",
+    "e1vmn5z8pxwrub8",
+    "e1vmn5z8pxwrub8",
+    "e1vmn5z8pxwrub8",
+    "e1vmn5z8pxwrub8",
+    "e1vmn5z8pxwrub8",
+    "e1vmn5z8pxwrub8",
+    "e1vmn5z8pxwrub8",
+    "e1vmn5z8pxwrub8",
+    "e1vmn5z8pxwrub8",
+    "e1vmn5z8pxwrub8",
+    "m2z4hgv004typdr",
+  ],
   rounds: [
     { round: 1, name: "Round 1" },
     { round: 2, name: "Quarterfinals" },
@@ -89,14 +106,14 @@ export const placeholder_bracket: Bracket = {
     {
       match_id: [3, 0],
       player_1_id: "e1vmn5z8pxwrub8",
-      player_2_id: "e1vmn5z8pxwrub8",
+      player_2_id: "m2z4hgv004typdr",
       result: { status: "COMPLETED", player_1_wins: 2, player_2_wins: 1, winner_id: "e1vmn5z8pxwrub8" },
     },
     {
       match_id: [3, 1],
       player_1_id: "e1vmn5z8pxwrub8",
-      player_2_id: "e1vmn5z8pxwrub8",
-      result: { status: "IN_PROGRESS" },
+      player_2_id: "m2z4hgv004typdr",
+      result: { status: "IN_PROGRESS", player_1_wins: 1, player_2_wins: 0 },
     },
 
     // Final (1 match)

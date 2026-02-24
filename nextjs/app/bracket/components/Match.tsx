@@ -3,6 +3,7 @@ import { is_bye_match, get_match_winner } from "../utils";
 import pb, { Player as PBPlayer } from "@/lib/pocketbase/pocketbase";
 import Image from "next/image";
 import Video from "@/components/Icons/Video/Video";
+import { MatchModal } from "./MatchModal";
 
 export const MATCH_HEIGHT = 80;
 
@@ -70,31 +71,33 @@ export async function Match({ match }: MatchProps) {
   const is_in_progress = match.result.status === "IN_PROGRESS";
 
   return (
-    <div className="relative">
-      <div
-        className="w-44 border border-zinc-300 dark:border-zinc-700 rounded overflow-hidden box-content"
-        style={{ height: MATCH_HEIGHT }}
-      >
-        <PlayerRow
-          player={player_1_data}
-          wins={match.result.player_1_wins ?? null}
-          is_winner={winner_id === match.player_1_id}
-          is_bye={is_bye}
-        />
-        <div className="border-t border-zinc-300 dark:border-zinc-700" />
-        <PlayerRow
-          player={player_2_data}
-          wins={match.result.player_2_wins ?? null}
-          is_winner={winner_id === match.player_2_id}
-          is_bye={false}
-        />
-      </div>
-      {is_in_progress && (
-        <div className="absolute left-0 top-full mt-1 flex items-center gap-1 text-xs text-red-500">
-          <Video className="w-3 h-3 fill-current" />
-          <span>Current Match</span>
+    <MatchModal match={match}>
+      <div className="relative">
+        <div
+          className="w-44 border border-zinc-300 dark:border-zinc-700 rounded overflow-hidden box-content hover:border-offbrand transition-colors"
+          style={{ height: MATCH_HEIGHT }}
+        >
+          <PlayerRow
+            player={player_1_data}
+            wins={match.result.player_1_wins ?? null}
+            is_winner={winner_id === match.player_1_id}
+            is_bye={is_bye}
+          />
+          <div className="border-t border-zinc-300 dark:border-zinc-700" />
+          <PlayerRow
+            player={player_2_data}
+            wins={match.result.player_2_wins ?? null}
+            is_winner={winner_id === match.player_2_id}
+            is_bye={false}
+          />
         </div>
-      )}
-    </div>
+        {is_in_progress && (
+          <div className="absolute left-0 top-full mt-1 flex items-center gap-1 text-xs text-red-500">
+            <Video className="w-3 h-3 fill-current" />
+            <span>Current Match</span>
+          </div>
+        )}
+      </div>
+    </MatchModal>
   );
 }

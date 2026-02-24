@@ -24,6 +24,7 @@ export interface RoundConfig {
 
 export interface Bracket {
   name: string;
+  player_ids: PlayerId[];
   rounds: RoundConfig[];
   matches: Match[];
 }
