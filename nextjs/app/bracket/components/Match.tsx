@@ -1,6 +1,8 @@
 import { Match as MatchType, Player } from "@/bracket/types";
 import { get_player_by_id, is_bye_match, get_match_winner } from "../utils";
 
+export const MATCH_HEIGHT = 80;
+
 interface MatchProps {
   match: MatchType;
   players: Player[];
@@ -26,7 +28,7 @@ function PlayerRow({ player, wins, is_winner, is_bye }: PlayerRowProps) {
     <div
       className={`flex items-center justify-between px-3 py-2 ${
         is_winner
-          ? "bg-green-100 dark:bg-green-900/30 font-semibold"
+          ? "bg-offbrand/20 font-semibold"
           : "bg-white dark:bg-zinc-800"
       }`}
     >
@@ -50,7 +52,10 @@ export function Match({ match, players }: MatchProps) {
   const is_bye = is_bye_match(match);
 
   return (
-    <div className="w-44 border border-zinc-300 dark:border-zinc-700 rounded overflow-hidden">
+    <div
+      className="w-44 border border-zinc-300 dark:border-zinc-700 rounded overflow-hidden box-content"
+      style={{ height: MATCH_HEIGHT }}
+    >
       <PlayerRow
         player={player_1}
         wins={match.result?.player_1_wins ?? null}
