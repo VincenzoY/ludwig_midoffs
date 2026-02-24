@@ -7,7 +7,7 @@ interface BracketProps {
   bracket: BracketType;
 }
 
-export function Bracket({ bracket }: BracketProps) {
+export async function Bracket({ bracket }: BracketProps) {
   // Fixed total height for the bracket
   const total_height = 800;
 
@@ -36,7 +36,6 @@ export function Bracket({ bracket }: BracketProps) {
                 <Round
                   round_name={round_config.name}
                   matches={current_matches}
-                  players={bracket.players}
                   total_height={total_height}
                 />
                 {index < bracket.rounds.length - 1 && (

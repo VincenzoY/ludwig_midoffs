@@ -1,21 +1,14 @@
-import { Player, PlayerId, Match } from "@/lib/bracket/types";
-
-export function get_player_by_id(
-  players: Player[],
-  id: PlayerId | null
-): Player | null {
-  if (id === null) return null;
-  return players.find((player) => player.id === id) ?? null;
-}
+import { PlayerId, Match } from "@/lib/bracket/types";
 
 export function is_bye_match(match: Match): boolean {
   const has_one_player =
     (match.player_1_id === null) !== (match.player_2_id === null);
-  return has_one_player && match.result !== null;
+  return has_one_player && match.result.status === "COMPLETED";
 }
 
-export function get_match_winner(match: Match): PlayerId | null {
-  return match.result?.winner_id ?? null;
+export function get_match_winner(match: Match): PlayerId | undefined {
+  if (match.result.status !== "COMPLETED") return undefined;
+  return match.result.winner_id;
 }
 
 export function get_matches_by_round(matches: Match[], round: number): Match[] {

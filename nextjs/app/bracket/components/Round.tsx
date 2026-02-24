@@ -1,4 +1,4 @@
-import { Match as MatchType, Player } from "@/lib/bracket/types";
+import { Match as MatchType } from "@/lib/bracket/types";
 import { Match } from "./Match";
 
 export const HEADER_HEIGHT = 36; // Height of round header: h-9 = 36px
@@ -6,14 +6,12 @@ export const HEADER_HEIGHT = 36; // Height of round header: h-9 = 36px
 interface RoundProps {
   round_name: string;
   matches: MatchType[];
-  players: Player[];
   total_height: number; // Fixed height for all rounds
 }
 
-export function Round({
+export async function Round({
   round_name,
   matches,
-  players,
   total_height,
 }: RoundProps) {
   return (
@@ -32,7 +30,6 @@ export function Round({
           <Match
             key={`${match.match_id[0]}-${match.match_id[1]}`}
             match={match}
-            players={players}
           />
         ))}
       </div>

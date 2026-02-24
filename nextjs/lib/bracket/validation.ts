@@ -38,8 +38,8 @@ function get_feeder_match_ids(match_id: MatchId): [MatchId, MatchId] {
 /**
  * Get the winner of a match
  */
-function get_match_winner(match: Match): PlayerId | null {
-  if (!match.result) return null;
+function get_match_winner(match: Match): PlayerId | undefined {
+  if (match.result.status !== "COMPLETED") return undefined;
   return match.result.winner_id;
 }
 
@@ -78,12 +78,12 @@ export function validate_bracket(
     }
 
     // 2. Check that completed matches don't differ from baseline
-    if (baseline_match.result !== null) {
+    if (baseline_match.result.status === "COMPLETED") {
       // Baseline match is completed, submission must match
-      if (match.result === null) {
+      if (match.result.status !== "COMPLETED") {
         errors.push({
           match_id: match.match_id,
-          message: "Match was completed in baseline but missing result in submission",
+          message: "Match was completed in baseline but not completed in submission",
         });
       } else if (match.result.winner_id !== baseline_match.result.winner_id) {
         errors.push({
@@ -114,7 +114,7 @@ export function validate_bracket(
       // Check player 1 comes from correct feeder match
       if (feeder_1) {
         const feeder_1_winner = get_match_winner(feeder_1);
-        if (feeder_1_winner !== null && match.player_1_id !== feeder_1_winner) {
+        if (feeder_1_winner !== undefined && match.player_1_id !== feeder_1_winner) {
           errors.push({
             match_id: match.match_id,
             message: `Player 1 should be winner of match [${feeder_1_id}] (${feeder_1_winner}), got ${match.player_1_id}`,
@@ -125,7 +125,7 @@ export function validate_bracket(
       // Check player 2 comes from correct feeder match
       if (feeder_2) {
         const feeder_2_winner = get_match_winner(feeder_2);
-        if (feeder_2_winner !== null && match.player_2_id !== feeder_2_winner) {
+        if (feeder_2_winner !== undefined && match.player_2_id !== feeder_2_winner) {
           errors.push({
             match_id: match.match_id,
             message: `Player 2 should be winner of match [${feeder_2_id}] (${feeder_2_winner}), got ${match.player_2_id}`,
@@ -135,11 +135,11 @@ export function validate_bracket(
     }
 
     // 4. Validate result consistency
-    if (match.result !== null) {
+    if (match.result.status === "COMPLETED") {
       const { winner_id } = match.result;
 
       // Winner must be one of the players
-      if (winner_id !== null) {
+      if (winner_id !== undefined) {
         if (winner_id !== match.player_1_id && winner_id !== match.player_2_id) {
           errors.push({
             match_id: match.match_id,
@@ -161,10 +161,10 @@ export function validate_bracket(
  * Useful for checking internal consistency
  */
 export function validate_bracket_internal(matches: Match[]): ValidationResult {
-  // Create an empty baseline with no results
+  // Create an empty baseline with WAITING status
   const empty_baseline: Match[] = matches.map((m) => ({
     ...m,
-    result: null,
+    result: { status: "WAITING" as const },
   }));
 
   return validate_bracket(matches, empty_baseline);

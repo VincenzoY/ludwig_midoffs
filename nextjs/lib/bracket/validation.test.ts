@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { validate_bracket, validate_bracket_internal } from "./validation";
-import { Match } from "./types";
+import { Match, MatchStatus } from "./types";
 
 // Helper to create a match
 function create_match(
@@ -8,13 +8,14 @@ function create_match(
   position: number,
   player_1_id: string | null,
   player_2_id: string | null,
-  winner_id: string | null = null
+  winner_id: string | undefined = undefined,
+  status: MatchStatus = winner_id ? "COMPLETED" : "WAITING"
 ): Match {
   return {
     match_id: [round, position],
     player_1_id,
     player_2_id,
-    result: winner_id ? { winner_id } : null,
+    result: { status, winner_id },
   };
 }
 
@@ -47,18 +48,18 @@ describe("validate_bracket", () => {
       expect(result.errors[0].message).toContain("differs from completed baseline");
     });
 
-    it("rejects submission missing result for completed baseline match", () => {
+    it("rejects submission not completed when baseline is completed", () => {
       const baseline: Match[] = [
         create_match(1, 0, "p1", "p2", "p1"),
       ];
       const submission: Match[] = [
-        create_match(1, 0, "p1", "p2", null),
+        create_match(1, 0, "p1", "p2", undefined, "WAITING"),
       ];
 
       const result = validate_bracket(submission, baseline);
       expect(result.valid).toBe(false);
       expect(result.errors).toHaveLength(1);
-      expect(result.errors[0].message).toContain("missing result in submission");
+      expect(result.errors[0].message).toContain("not completed in submission");
     });
 
     it("rejects submission with different players than baseline", () => {
@@ -77,7 +78,7 @@ describe("validate_bracket", () => {
 
     it("rejects submission with match not in baseline", () => {
       const baseline: Match[] = [
-        create_match(1, 0, "p1", "p2", null),
+        create_match(1, 0, "p1", "p2", undefined),
       ];
       const submission: Match[] = [
         create_match(1, 0, "p1", "p2", "p1"),
@@ -93,7 +94,7 @@ describe("validate_bracket", () => {
 
     it("allows submission to add results to incomplete baseline matches", () => {
       const baseline: Match[] = [
-        create_match(1, 0, "p1", "p2", null),
+        create_match(1, 0, "p1", "p2", undefined),
       ];
       const submission: Match[] = [
         create_match(1, 0, "p1", "p2", "p1"),
@@ -109,7 +110,7 @@ describe("validate_bracket", () => {
       const matches: Match[] = [
         create_match(1, 0, "p1", "p2", "p1"),
         create_match(1, 1, "p3", "p4", "p4"),
-        create_match(2, 0, "p1", "p4", null),
+        create_match(2, 0, "p1", "p4", undefined),
       ];
 
       const result = validate_bracket_internal(matches);
@@ -120,7 +121,7 @@ describe("validate_bracket", () => {
       const matches: Match[] = [
         create_match(1, 0, "p1", "p2", "p1"),
         create_match(1, 1, "p3", "p4", "p4"),
-        create_match(2, 0, "p2", "p4", null), // p2 should be p1
+        create_match(2, 0, "p2", "p4", undefined), // p2 should be p1
       ];
 
       const result = validate_bracket_internal(matches);
@@ -132,7 +133,7 @@ describe("validate_bracket", () => {
       const matches: Match[] = [
         create_match(1, 0, "p1", "p2", "p1"),
         create_match(1, 1, "p3", "p4", "p4"),
-        create_match(2, 0, "p1", "p3", null), // p3 should be p4
+        create_match(2, 0, "p1", "p3", undefined), // p3 should be p4
       ];
 
       const result = validate_bracket_internal(matches);
@@ -142,9 +143,9 @@ describe("validate_bracket", () => {
 
     it("allows null players when feeder match has no winner yet", () => {
       const matches: Match[] = [
-        create_match(1, 0, "p1", "p2", null), // no winner yet
+        create_match(1, 0, "p1", "p2", undefined), // no winner yet
         create_match(1, 1, "p3", "p4", "p4"),
-        create_match(2, 0, null, "p4", null), // player 1 unknown
+        create_match(2, 0, null, "p4", undefined), // player 1 unknown
       ];
 
       const result = validate_bracket_internal(matches);
@@ -181,9 +182,18 @@ describe("validate_bracket", () => {
       expect(result.errors[0].message).toContain("not a player in this match");
     });
 
-    it("accepts match with no result", () => {
+    it("accepts match with WAITING status", () => {
       const matches: Match[] = [
-        create_match(1, 0, "p1", "p2", null),
+        create_match(1, 0, "p1", "p2", undefined, "WAITING"),
+      ];
+
+      const result = validate_bracket_internal(matches);
+      expect(result.valid).toBe(true);
+    });
+
+    it("accepts match with IN_PROGRESS status", () => {
+      const matches: Match[] = [
+        create_match(1, 0, "p1", "p2", undefined, "IN_PROGRESS"),
       ];
 
       const result = validate_bracket_internal(matches);
@@ -234,7 +244,7 @@ describe("validate_bracket", () => {
         create_match(2, 0, "p1", "p3", "p1"), // p3 should be p4
         create_match(2, 1, "p5", "p8", "p5"),
         // Round 3
-        create_match(3, 0, "p1", "p5", null),
+        create_match(3, 0, "p1", "p5", undefined),
       ];
 
       const result = validate_bracket_internal(matches);
@@ -263,7 +273,7 @@ describe("validate_bracket", () => {
       const matches: Match[] = [
         create_match(1, 0, "p1", null, "p1"),
         create_match(1, 1, "p2", "p3", "p2"),
-        create_match(2, 0, "p1", "p2", null),
+        create_match(2, 0, "p1", "p2", undefined),
       ];
 
       const result = validate_bracket_internal(matches);
