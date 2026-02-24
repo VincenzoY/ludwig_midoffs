@@ -6,4 +6,4 @@ services:
     volumes:
       - pb_data:/pb/pb_data  # Use a different data volume if needed
     ports:
-      - "8090:8090"  # Expose a different port for testing
+      - "8091:8091"  # Expose a different port for testing
