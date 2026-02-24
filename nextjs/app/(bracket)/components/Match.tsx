@@ -112,9 +112,9 @@ export function Match({ match }: MatchProps) {
           />
         </div>
         {is_in_progress && (
-          <div className="absolute left-0 top-full mt-1 flex items-center gap-1 text-xs text-red-500">
+          <div className="absolute left-0 top-full flex items-center gap-1 text-xs text-red-500">
             <Video className="w-3 h-3 fill-current" />
-            <span>Current Match</span>
+            <span>Live</span>
           </div>
         )}
       </div>
