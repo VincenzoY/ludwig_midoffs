@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useBracket } from "../hooks/useBracket";
 import { Bracket } from "./Bracket";
 
@@ -43,6 +44,11 @@ export function BracketContainer() {
     <div className="flex flex-col gap-2">
       <Bracket bracket={bracketEntry.bracket} />
       <LastUpdated timestamp={bracketEntry.updated} />
+      <div className="flex items-center gap-2 px-3 py-2 mt-4 bg-zinc-800 border border-zinc-700 rounded-lg w-full">
+        <span className="text-zinc-300 text-sm">Game 3.</span>
+        <Image src="/Cinema.png" alt="Cinema" width={32} height={232} />
+        <span className="text-zinc-300 text-sm">please don&apos;t throw anymore super.</span>
+      </div>
     </div>
   );
 }
