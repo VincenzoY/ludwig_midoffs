@@ -41,7 +41,8 @@ export default function RootLayout({
                 className="hover:text-zinc-700 dark:hover:text-zinc-200 underline"
               >
                 @yuyu
-              </a>
+              </a>{" "}
+              (please stop throwing super)
             </footer>
           </Providers>
         </div>
