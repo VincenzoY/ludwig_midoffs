@@ -43,11 +43,6 @@ export function BracketContainer() {
     <div className="flex flex-col gap-2">
       <Bracket bracket={bracketEntry.bracket} />
       <LastUpdated timestamp={bracketEntry.updated} />
-      <div className="p-4 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg">
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
-          i dunno what kinda bracket system ludwig is using. quarters/semis might be flipped. will fix if there is any issues later
-        </p>
-      </div>
     </div>
   );
 }
