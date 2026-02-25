@@ -42,6 +42,7 @@ export default function RootLayout({
               >
                 @yuyu
               </a>{" "}
+              / vincen2o_ on Twitch.
               (please stop throwing super)
             </footer>
           </Providers>
