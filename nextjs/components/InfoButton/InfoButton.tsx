@@ -32,7 +32,7 @@ const InfoModal = NiceModal.create(() => {
         <p>
           I thought it might be cool to throw together a site for Ludwig&apos;s Jerkoffs since the Midoffs site was pretty helpful in tracking standings. Since this was only announced like a day ago and there is still barely any info, I&apos;ve only built out the tournament bracket and didn&apos;t have time for any prediction/pickems stuff. There also might be a bit of scuff since I only had a day to build this but I&apos;ll try to fix things as they come up. If you found this cool, maybe follow me{" "}
           <a
-            href="https://x.com/yuyu933933"
+            href="https://x.com/vincen2o_"
             target="_blank"
             rel="noopener noreferrer"
             className="text-offbrand hover:underline"

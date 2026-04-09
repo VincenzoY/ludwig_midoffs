@@ -35,7 +35,7 @@ export default function RootLayout({
             <footer className="py-4 text-center text-sm text-zinc-500 dark:text-zinc-400">
               made by{" "}
               <a
-                href="https://x.com/yuyu933933"
+                href="https://x.com/vincen2o_"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-zinc-700 dark:hover:text-zinc-200 underline"
